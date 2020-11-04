@@ -7,13 +7,15 @@ import { FormsModule } from '@angular/forms';
 import { RangesViewComponent } from './ranges-view/ranges-view.component';
 import { AuthComponent } from './auth/auth.component';
 import { EquityViewComponent } from './equity-view/equity-view.component';
+import { HandComponent } from './hand/hand.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RangesViewComponent,
     AuthComponent,
-    EquityViewComponent
+    EquityViewComponent,
+    HandComponent
   ],
   imports: [
     BrowserModule,
