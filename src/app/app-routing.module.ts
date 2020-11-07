@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RangesViewComponent } from './ranges-view/ranges-view.component';
-import { AuthComponent } from './auth/auth.component';
 import { EquityViewComponent } from './equity-view/equity-view.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { SignInComponent } from './sign-in/sign-in.component';
 import { AuthGuard } from './services/auth-guard.service';
-import { NewUserComponent } from './new-user/new-user.component';
 
 const routes: Routes = [
-  { path: 'auth', component: AuthComponent },
+  { path: 'auth/signin', component: SignInComponent },
+  { path: 'auth/signup', component: SignUpComponent },
   { path: 'ranges', canActivate: [AuthGuard], component: RangesViewComponent },
   { path: 'equity', canActivate: [AuthGuard], component: EquityViewComponent},
-  { path: 'register', component: NewUserComponent},
-  { path: '**', redirectTo: 'auth' }
+  { path: '**', redirectTo: 'auth/signin' }
 ];
 
 @NgModule({
