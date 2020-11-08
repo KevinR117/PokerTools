@@ -6,4 +6,12 @@ export class Hand {
         public card2: Card,
         public suited: boolean
     ) { }
+    
+    areCardsEqual(): boolean {
+        if (this.card1 == this.card2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -16,7 +16,6 @@ export class RangesViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.arrayHands = this.tableService.getArray();
-    console.log(this.arrayHands);
   }
 
 }

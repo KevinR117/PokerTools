@@ -1,8 +1,9 @@
-<!-- <app-hand [card1]="arrayHands[0][0].card1" [card2]="arrayHands[0][0].card2" [suited]="'o'"></app-hand> -->
 <table>
     <tr *ngFor="let line of arrayHands">
-        <td>
-            <app-hand *ngFor="let hand of line" [card1]="hand.card1" [card2]="hand.card2" [suited]="'o'"></app-hand>
+        <td *ngFor="let hand of line">
+            <app-hand [card1]="hand.card1" [card2]="hand.card2" [suited]="'o'" *ngIf="!hand.areCardsEqual() && !hand.suited"></app-hand>
+            <app-hand [card1]="hand.card1" [card2]="hand.card2" [suited]="'s'" *ngIf="!hand.areCardsEqual() && hand.suited"></app-hand>
+            <app-hand [card1]="hand.card1" [card2]="hand.card2" [suited]="''" *ngIf="hand.areCardsEqual()"></app-hand>
         </td>
     </tr>
 </table>
