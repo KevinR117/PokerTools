@@ -11,6 +11,7 @@ import { HandComponent } from './hand/hand.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { UserService } from './services/user.service';
+import { TableService } from './services/table.service';
 import { UserListComponent } from './user-list/user-list.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -35,7 +36,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
   providers: [
     AuthService,
     AuthGuard,
-    UserService
+    UserService,
+    TableService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,1 +1,8 @@
-<p>ranges-view works!</p>
+<!-- <app-hand [card1]="arrayHands[0][0].card1" [card2]="arrayHands[0][0].card2" [suited]="'o'"></app-hand> -->
+<table>
+    <tr *ngFor="let line of arrayHands">
+        <td>
+            <app-hand *ngFor="let hand of line" [card1]="hand.card1" [card2]="hand.card2" [suited]="'o'"></app-hand>
+        </td>
+    </tr>
+</table>
