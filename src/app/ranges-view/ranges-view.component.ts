@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Hand } from '../models/hand.model';
 import { Subscription } from 'rxjs';
-// import { TableService } from '../services/table.service';
 import { Pair } from '../models/pair.model';
 import { UserService } from '../services/user.service';
 
@@ -13,20 +12,29 @@ import { UserService } from '../services/user.service';
 
 export class RangesViewComponent implements OnInit {
 
+  rangeTitle: string;
+
+  bbCount: number = 0;
+  pos: number = 0;
+
   arrayHands: Hand[][] = new Array<Array<Hand>>();
+  arrayRanges: Pair<string, Pair<string, Hand[][]>[]>[];
   arraySubscription: Subscription;
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    // this.arrayHands = this.tableService.getArray();
-
     this.arraySubscription = this.userService.rangesSubject.subscribe(
       (arrayRanges: Pair<string, Pair<string, Hand[][]>[]>[]) => {
-
+        
+        this.arrayRanges = arrayRanges;
         //Modifier les index ici, faire une fonction qui donnera en fonction de l'identifiant pos-bb la bonne range à afficher
+        this.rangeTitle = 'Open ' + arrayRanges[this.pos].getKey().toUpperCase() 
+                                  + ' - ' 
+                                  + arrayRanges[this.pos].getValue()[this.bbCount].getKey() 
+                                  + ' BB';
 
-        this.arrayHands = arrayRanges[0].getValue()[0].getValue();
+        this.arrayHands = arrayRanges[this.pos].getValue()[this.bbCount].getValue();
       }
     )
 
@@ -37,4 +45,21 @@ export class RangesViewComponent implements OnInit {
     this.arraySubscription.unsubscribe();
   }
 
+  updatePos(newPos: number) {
+    this.pos = newPos;
+    this.rangeTitle = 'Open ' + this.arrayRanges[this.pos].getKey().toUpperCase() 
+                              + ' - ' 
+                              + this.arrayRanges[this.pos].getValue()[this.bbCount].getKey() 
+                              + ' BB';
+    this.arrayHands = this.arrayRanges[this.pos].getValue()[this.bbCount].getValue();
+  }
+
+  updateBbCount(newBbCount: number) {
+    this.bbCount = newBbCount;
+    this.rangeTitle = 'Open ' + this.arrayRanges[this.pos].getKey().toUpperCase() 
+                              + ' - ' 
+                              + this.arrayRanges[this.pos].getValue()[this.bbCount].getKey() 
+                              + ' BB';
+    this.arrayHands = this.arrayRanges[this.pos].getValue()[this.bbCount].getValue();
+  }
 }

@@ -1,13 +1,11 @@
 import { RangeArray } from '../models/range-array.model';
 import { Hand } from '../models/hand.model';
-import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
 import { Pair } from '../models/pair.model';
 
-@Injectable()
 export class UserService {
 
     private rangesOfCurrentUser: RangeArray = new RangeArray();
