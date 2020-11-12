@@ -12,10 +12,10 @@ export class Range {
         }
         for (let line = 0; line < 13; line++) {
             for (let column = line; column < 13; column++) {
-                this.handsArray[line][column] = new Hand(Object.values(Card)[line], Object.values(Card)[column], true);
                 if (line != column) {
-                    this.handsArray[column][line] = new Hand(Object.values(Card)[line], Object.values(Card)[column], false);
+                    this.handsArray[line][column] = new Hand(Object.values(Card)[line], Object.values(Card)[column], true);
                 }
+                this.handsArray[column][line] = new Hand(Object.values(Card)[line], Object.values(Card)[column], false);
             }
         }
     }
