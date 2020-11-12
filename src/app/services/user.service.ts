@@ -1,19 +1,17 @@
-// import { User } from '../models/user.model';
 import { RangeArray } from '../models/range-array.model';
+import { Hand } from '../models/hand.model';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
+import { Pair } from '../models/pair.model';
 
 @Injectable()
 export class UserService {
 
-    private rangesOfCurrentUser: RangeArray;
-    // rangesSubject = new Subject<Array<number>>();
-
-    // private users: User[] = [];
-    // userSubject = new Subject<User[]>();
+    private rangesOfCurrentUser: RangeArray = new RangeArray();
+    rangesSubject = new Subject<Pair<string, Pair<string, Hand[][]>[]>[]>();
 
     constructor() { }
 
@@ -43,14 +41,17 @@ export class UserService {
                 this.rangesOfCurrentUser = snapshot.val();
             })
         }
+        this.emitRanges();
     }
 
-    // emitUsers() {
-    //     this.userSubject.next(this.users.slice());
-    // }
+    emitRanges() {
+        this.rangesSubject.next(this.rangesOfCurrentUser.rangesArray.slice());
+    }
 
-    // addUser(user: User) {
-    //     this.users.push(user);
-    //     this.emitUsers();
-    // }
+    updateRanges() {
+
+        //Updates à faire
+
+        this.emitRanges();
+    }
 }
