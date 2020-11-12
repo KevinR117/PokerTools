@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import { UserService } from '../services/user.service';
 
 @Injectable()
 export class AuthService {
 
     isAuth: boolean;
+
+    constructor(private userService: UserService) { }
 
     signIn(email: string, password: string) {
         return new Promise(
@@ -13,6 +17,7 @@ export class AuthService {
                     () => {
                         this.isAuth = true;
                         resolve(true);
+                        this.userService.downloadUserRanges();
                     },
                     (error) => {
                         reject(error);
@@ -28,6 +33,8 @@ export class AuthService {
                 firebase.auth().createUserWithEmailAndPassword(email, password).then(
                     () => {
                         resolve(true);
+                        this.userService.initRanges();
+                        this.userService.saveUserRanges();
                     },
                     (error) => {
                         reject(error);
