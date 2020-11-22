@@ -12,9 +12,11 @@ import { UserService } from '../services/user.service';
 
 export class RangesViewComponent implements OnInit {
 
+  modifyMode: boolean = false;
+
   rangeTitle: string;
 
-  bbCount: number = 0;
+  bb: number = 0;
   pos: number = 0;
 
   arrayHands: Hand[][] = new Array<Array<Hand>>();
@@ -31,37 +33,34 @@ export class RangesViewComponent implements OnInit {
         //Modifier les index ici, faire une fonction qui donnera en fonction de l'identifiant pos-bb la bonne range à afficher
         this.rangeTitle = 'Open ' + arrayRanges[this.pos].getKey().toUpperCase() 
                                   + ' - ' 
-                                  + arrayRanges[this.pos].getValue()[this.bbCount].getKey() 
+                                  + arrayRanges[this.pos].getValue()[this.bb].getKey() 
                                   + ' BB';
 
-        this.arrayHands = arrayRanges[this.pos].getValue()[this.bbCount].getValue();
+        this.arrayHands = arrayRanges[this.pos].getValue()[this.bb].getValue();
       }
     )
-
-    // this.userService.emitRanges();
   }
 
   ngOnDestroy(): void {
     this.arraySubscription.unsubscribe();
   }
 
-  //FAIRE CES CHANGEMENTS AVEC DES SUBJECTS ---> C'EST PLUS ANGULAR FRIENDLY
-
   updatePos(newPos: number) {
     this.pos = newPos;
-    this.rangeTitle = 'Open ' + this.arrayRanges[this.pos].getKey().toUpperCase() 
-                              + ' - ' 
-                              + this.arrayRanges[this.pos].getValue()[this.bbCount].getKey() 
-                              + ' BB';
-    this.arrayHands = this.arrayRanges[this.pos].getValue()[this.bbCount].getValue();
+    this.userService.emitRanges();
   }
 
   updateBbCount(newBbCount: number) {
-    this.bbCount = newBbCount;
-    this.rangeTitle = 'Open ' + this.arrayRanges[this.pos].getKey().toUpperCase() 
-                              + ' - ' 
-                              + this.arrayRanges[this.pos].getValue()[this.bbCount].getKey() 
-                              + ' BB';
-    this.arrayHands = this.arrayRanges[this.pos].getValue()[this.bbCount].getValue();
+    this.bb = newBbCount;
+    this.userService.emitRanges();
   }
+
+  modify(mode: boolean) {
+    this.modifyMode = mode;
+  }
+
+  saveNewRanges() {
+    this.userService.saveUserRanges();
+    this.modify(false);
+}
 }

@@ -1,9 +1,10 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
-            <div [class]="playCard">
-                <p>{{card1 + card2 + suited}}</p>
+            <div [class]="playCard" *ngIf="!modifyMode">
+                <p class="p">{{card1 + card2 + suited}}</p>
             </div>
+            <button type="button" class="btn-modify" [class]="playCard" *ngIf="modifyMode" (click)="onChangePlay(card1, card2, suited, playCardUpdate, pos, bb)">{{card1 + card2 + suited}}</button>
         </div>
     </div>
 </div>

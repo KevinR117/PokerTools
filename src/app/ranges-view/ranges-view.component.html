@@ -15,14 +15,27 @@
 
 <h4> {{rangeTitle}} </h4>
 
-<table>
+<table *ngIf="!modifyMode">
     <tr *ngFor="let line of arrayHands">
         <td *ngFor="let hand of line">
-            <app-hand [card1]="hand.card1" [card2]="hand.card2" [suited]="'o'" [playCard]="hand.play" *ngIf="!hand.areCardsEqual() && !hand.suited"></app-hand>
-            <app-hand [card1]="hand.card1" [card2]="hand.card2" [suited]="'s'" [playCard]="hand.play" *ngIf="!hand.areCardsEqual() && hand.suited"></app-hand>
-            <app-hand [card1]="hand.card1" [card2]="hand.card2" [suited]="''" [playCard]="hand.play" *ngIf="hand.areCardsEqual()"></app-hand>
+            <app-hand [card1]="hand.card1" [card2]="hand.card2" [suited]="'o'" [playCard]="hand.play" [modifyMode]="false" *ngIf="!hand.areCardsEqual() && !hand.suited"></app-hand>
+            <app-hand [card1]="hand.card1" [card2]="hand.card2" [suited]="'s'" [playCard]="hand.play" [modifyMode]="false" *ngIf="!hand.areCardsEqual() && hand.suited"></app-hand>
+            <app-hand [card1]="hand.card1" [card2]="hand.card2" [suited]="''" [playCard]="hand.play" [modifyMode]="false" *ngIf="hand.areCardsEqual()"></app-hand>
         </td>
     </tr>
 </table>
 
-<a class="btn btn-outline-dark" routerLink="/ranges/modifyRange" routerLinkActive="active">Modifier ses ranges</a>
+<table *ngIf="modifyMode">
+    <tr *ngFor="let line of arrayHands">
+        <td *ngFor="let hand of line">
+            <app-hand [card1]="hand.card1" [card2]="hand.card2" [suited]="'o'" [playCard]="hand.play" [modifyMode]="true" [pos]="pos" [bb]="bb" *ngIf="!hand.areCardsEqual() && !hand.suited"></app-hand>
+            <app-hand [card1]="hand.card1" [card2]="hand.card2" [suited]="'s'" [playCard]="hand.play" [modifyMode]="true" [pos]="pos" [bb]="bb" *ngIf="!hand.areCardsEqual() && hand.suited"></app-hand>
+            <app-hand [card1]="hand.card1" [card2]="hand.card2" [suited]="''" [playCard]="hand.play" [modifyMode]="true" [pos]="pos" [bb]="bb" *ngIf="hand.areCardsEqual()"></app-hand>
+        </td>
+    </tr>
+</table>
+
+<a class="btn btn-outline-dark" *ngIf="!modifyMode" (click)="modify(true)">Modifier ses ranges</a>
+<a class="btn btn-outline-primary" *ngIf="modifyMode" (click)="saveNewRanges()">Sauvegarder</a>
+
+<app-ranges-modification></app-ranges-modification>

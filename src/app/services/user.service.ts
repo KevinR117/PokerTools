@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import { RangeArray } from '../models/range-array.model';
 import { Hand } from '../models/hand.model';
 import { BehaviorSubject } from 'rxjs';
@@ -6,6 +7,7 @@ import 'firebase/database';
 import 'firebase/auth';
 import { Pair } from '../models/pair.model';
 
+@Injectable()
 export class UserService {
 
     private rangesOfCurrentUser: RangeArray = new RangeArray();
@@ -49,12 +51,5 @@ export class UserService {
 
     emitRanges() {
         this.rangesSubject.next(this.rangesOfCurrentUser.rangesArray.slice());
-    }
-
-    updateRanges() {
-
-        //Updates à faire
-
-        this.emitRanges();
     }
 }
