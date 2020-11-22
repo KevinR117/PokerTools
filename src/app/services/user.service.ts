@@ -1,6 +1,6 @@
 import { RangeArray } from '../models/range-array.model';
 import { Hand } from '../models/hand.model';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
@@ -9,13 +9,11 @@ import { Pair } from '../models/pair.model';
 export class UserService {
 
     private rangesOfCurrentUser: RangeArray = new RangeArray();
-    rangesSubject = new Subject<Pair<string, Pair<string, Hand[][]>[]>[]>();
+    rangesSubject: BehaviorSubject<Pair<string, Pair<string, Hand[][]>[]>[]>;
 
-    constructor() { }
-
-    initRanges() {
-
-        this.rangesOfCurrentUser = new RangeArray();
+    constructor() {
+        let basePair: Pair<string, Pair<string, Hand[][]>[]>[] = this.rangesOfCurrentUser.rangesArray;
+        this.rangesSubject = new BehaviorSubject<Pair<string, Pair<string, Hand[][]>[]>[]>(basePair);
     }
 
     getRangesOfCurrentUser() {
@@ -35,11 +33,18 @@ export class UserService {
         if (user != null)
         {
             firebase.database().ref(user.uid).on('value', (snapshot) => {
-                this.rangesOfCurrentUser = new RangeArray();
-                this.rangesOfCurrentUser = snapshot.val();
+                for (let pos: number = 0; pos < 6; pos++) {
+                    for (let bb: number = 0; bb < 3; bb++) {
+                        for (let line: number = 0; line < 13; line++) {
+                            for (let column: number = 0; column < 13; column++) {
+                                this.rangesOfCurrentUser.rangesArray[pos].getValue()[bb].getValue()[line][column].play = snapshot.val().rangesArray[pos]['value'][bb]['value'][line][column].play;
+                            }
+                        }
+                    }
+                }
+                this.emitRanges();
             })
         }
-        this.emitRanges();
     }
 
     emitRanges() {

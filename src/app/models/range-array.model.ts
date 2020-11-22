@@ -8,17 +8,16 @@ export class RangeArray {
 
     public rangesArray: Array<Pair<string, Array<Pair<string, Array<Array<Hand>>>>>>;
 
-    constructor() {
-        let bbCountArray: Array<Pair<string, Array<Array<Hand>>>> = new Array<Pair<string, Array<Array<Hand>>>>(3);
-        for (let i = 0; i < 3; i++) {
-            let range: Range = new Range();
-            let handsArray: Hand[][] = range.handsArray;
-            bbCountArray[i] = new Pair(Object.values(BlindCount)[i], handsArray);
-        }
-
+    constructor() {    
         let posArray: Array<Pair<string, Array<Pair<string, Array<Array<Hand>>>>>> = new Array<Pair<string, Array<Pair<string, Array<Array<Hand>>>>>>(6);
-        for (let i = 0; i < 6; i++) {
-            posArray[i] = new Pair(Object.values(Position)[i], bbCountArray)
+        for (let pos = 0; pos < 6; pos++) {
+            let bbCountArray: Array<Pair<string, Array<Array<Hand>>>> = new Array<Pair<string, Array<Array<Hand>>>>(3);
+            for (let bb = 0; bb < 3; bb++) {
+                let range: Range = new Range();
+                let handsArray: Hand[][] = range.handsArray;
+                bbCountArray[bb] = new Pair(Object.values(BlindCount)[bb], handsArray);
+            }
+            posArray[pos] = new Pair(Object.values(Position)[pos], bbCountArray);
         }
         
         this.rangesArray = posArray;

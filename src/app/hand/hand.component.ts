@@ -10,6 +10,7 @@ export class HandComponent implements OnInit {
   @Input() card1: string;
   @Input() card2: string;
   @Input() suited: string;
+  @Input() playCard: string;
 
   constructor() { }
 

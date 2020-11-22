@@ -38,12 +38,14 @@ export class RangesViewComponent implements OnInit {
       }
     )
 
-    this.userService.emitRanges();
+    // this.userService.emitRanges();
   }
 
   ngOnDestroy(): void {
     this.arraySubscription.unsubscribe();
   }
+
+  //FAIRE CES CHANGEMENTS AVEC DES SUBJECTS ---> C'EST PLUS ANGULAR FRIENDLY
 
   updatePos(newPos: number) {
     this.pos = newPos;

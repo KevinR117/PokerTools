@@ -16,8 +16,8 @@ export class AuthService {
                 firebase.auth().signInWithEmailAndPassword(email, password).then(
                     () => {
                         this.isAuth = true;
-                        resolve(true);
                         this.userService.downloadUserRanges();
+                        resolve(true);
                     },
                     (error) => {
                         reject(error);
@@ -32,9 +32,8 @@ export class AuthService {
             (resolve, reject) => {
                 firebase.auth().createUserWithEmailAndPassword(email, password).then(
                     () => {
-                        resolve(true);
-                        this.userService.initRanges();
                         this.userService.saveUserRanges();
+                        resolve(true);
                     },
                     (error) => {
                         reject(error);
