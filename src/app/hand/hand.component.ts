@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { UpdateRangeService } from '../services/update-range.service';
 import { PlayCard } from '../models/play-card.model';
 import { Subscription } from 'rxjs';
@@ -9,7 +9,7 @@ import { Card } from '../models/card.model';
   templateUrl: './hand.component.html',
   styleUrls: ['./hand.component.scss']
 })
-export class HandComponent implements OnInit {
+export class HandComponent implements OnInit, OnDestroy {
 
   @Input() card1: string;
   @Input() card2: string;
@@ -31,6 +31,10 @@ export class HandComponent implements OnInit {
         this.playCardUpdate = playCardUpdate;
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.playCardUpdateSubscription.unsubscribe();
   }
 
   onChangePlay(card1: string, card2: string, suited: string, play: PlayCard, pos: number, bb: number) {
