@@ -64,6 +64,103 @@
     border-radius: 30%;
 }
 
+.handBVB3bet {
+    color: black;
+    text-align: center;
+    font-weight: normal;
+    height: 45px;
+    width: 45px;
+    border: 1px solid yellow;
+    background-color: #FFDC30;
+    border-radius: 30%;
+}
+
+.handBVBCall {
+    color: black;
+    text-align: center;
+    font-weight: normal;
+    height: 45px;
+    width: 45px;
+    border: 1px solid #309492;
+    background-color: #7AFFFC;
+    border-radius: 30%;
+}
+
+.handRaiseCallRaiseBroke {
+    color: black;
+    text-align: center;
+    font-weight: normal;
+    height: 45px;
+    width: 45px;
+    border-radius: 30%;
+    border: 1px solid grey;
+    background-image: repeating-linear-gradient(0deg,
+        #E9C5AD,
+        #E9C5AD 22px,
+        #FF7171 22px,
+        #FF7171 45px);
+}
+
+.handRaiseFoldRaiseBroke {
+    color: black;
+    text-align: center;
+    font-weight: normal;
+    height: 45px;
+    width: 45px;
+    border-radius: 30%;
+    border: 1px solid grey;
+    background-image: repeating-linear-gradient(0deg,
+        #B9FFB4,
+        #B9FFB4 22px,
+        #FF7171 22px,
+        #FF7171 45px);
+}
+
+.handRaiseCallRaise4bet {
+    color: black;
+    text-align: center;
+    font-weight: normal;
+    height: 45px;
+    width: 45px;
+    border-radius: 30%;
+    border: 1px solid grey;
+    background-image: repeating-linear-gradient(0deg,
+        #E9C5AD,
+        #E9C5AD 22px,
+        #FFDC30 22px,
+        #FFDC30 45px);
+}
+
+.handRaiseFoldRaise4bet {
+    color: black;
+    text-align: center;
+    font-weight: normal;
+    height: 45px;
+    width: 45px;
+    border-radius: 30%;
+    border: 1px solid grey;
+    background-image: repeating-linear-gradient(0deg,
+        #B9FFB4,
+        #B9FFB4 22px,
+        #FFDC30 22px,
+        #FFDC30 45px);
+}
+
+.handBVBCall3bet {
+    color: black;
+    text-align: center;
+    font-weight: normal;
+    height: 45px;
+    width: 45px;
+    border-radius: 30%;
+    border: 1px solid grey;
+    background-image: repeating-linear-gradient(0deg,
+        #7AFFFC,
+        #7AFFFC 22px,
+        #FFDC30 22px,
+        #FFDC30 45px);
+}
+
 .p {
     position: relative;
     top: 22%;
