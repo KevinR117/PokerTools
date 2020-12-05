@@ -14,7 +14,7 @@ export class SignInComponent implements OnInit {
   signInForm: FormGroup;
   errorMessage: string;
 
-  constructor(private userService: UserService, private authService: AuthService, private router: Router, private formBuilder: FormBuilder) { }
+  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.initForm();
