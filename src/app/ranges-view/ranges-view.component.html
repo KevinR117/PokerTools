@@ -38,4 +38,4 @@
 <a class="btn btn-outline-dark" *ngIf="!modifyMode" (click)="modify(true)">Modifier ses ranges</a>
 <a class="btn btn-outline-primary" *ngIf="modifyMode" (click)="saveNewRanges()">Sauvegarder</a>
 
-<app-ranges-modification></app-ranges-modification>
+<app-ranges-modification *ngIf="modifyMode"></app-ranges-modification>
